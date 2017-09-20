@@ -21,7 +21,7 @@ def roll(N):
     fig1 = plt.figure(1)                            # declare figure
     plt.stem(b1,h1)                                 # type of plot, stem plot
     plt.title('Stem plot - Sum of two dice')        # title of graph 
-    plt.xlabel('Sum of two dice')                   # x axis label
+    plt.xlabel('Number of rolls')                   # x axis label
     plt.ylabel('Number of occurrences')             # y axis label
     fig1.savefig('2 EE381 Proj Stoch Exper-1.png')  # name of file saved  
 
