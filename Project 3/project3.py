@@ -19,8 +19,15 @@ def problem_1(N):
 	plt.ylabel('Number of occurrences')
 	fig1.savefig('2 EE381 Proj Stoch Exper-1.png')
 
-problem_1(10000)
-#def problem_2(N):
+def problem_2(N):
+	n = 1000
+	p = (1/6)
+	q = (1 - p)
+	x = 3
+	# (1000, 3)
+
+	(p**x) * (q**(n - x))
+
 
 
 #def problem_3(N):
@@ -49,3 +56,5 @@ Find P(x successed in n trials)
 Binomial formula (theoretical calculation)
 (n, x) p^x q^(n - x)
 '''
+
+problem_1(10000)
