@@ -1,10 +1,10 @@
 import numpy as np
-import random
 import matplotlib.pyplot as plt
+from math import factorial, exp
 
 def problem_1(N):
 	n = 1000
-	# n trials if the sum of 3 rolls is 18, wee rolled three 6's
+	# n trials if the sum of 3 rolls is 18, we rolled three 6's
 	# X is the # of successes in n trials
 	# repeat the experiment N times
 	success = [sum([int(sum([np.random.randint(1, 7) for i in range(0, 3)]) == 18) for i in range(0, n)]) for i in range(0, N)]
@@ -14,23 +14,58 @@ def problem_1(N):
 	b1 = bin_edges[0 : 16]
 	fig1 = plt.figure(1)
 	plt.stem(b1/N, h1)
-	plt.title('Stem plot - Sum of two dice')
+	plt.title('Probability of rolling three 6\'s')
 	plt.xlabel('Number of rolls')
-	plt.ylabel('Number of occurrences')
-	fig1.savefig('2 EE381 Proj Stoch Exper-1.png')
+	plt.ylabel('Probability')
+	fig1.savefig('Project3Problem1.png')
+
 
 def problem_2(N):
+	binomial = lambda n, p, q, x : (factorial(n) // (factorial(x) * factorial(n - x))) * (p**x) * (q**(n - x))
+	n = 1000		# number of trials
+	p = 1/216		# probability of success: 3 sixes in a single roll of 3 fair die
+	q = 1 - p		# probability of failure
+
+	X = [binomial(n, p, q, x) for x in range(0, 21)]
+	print (*X, sep='\n')
+
+	b = range(1, 18)
+	h1, bin_edges = np.histogram(X, bins = b)
+	b1 = bin_edges[0 : 16]
+	fig1 = plt.figure(1)
+	plt.stem(b1/N, h1)
+	plt.title('Probability of rolling three 6\'s')
+	plt.xlabel('Number of rolls')
+	plt.ylabel('Probability')
+	fig1.savefig('Project3Problem2.png')
+
+
+def problem_3(N):
+	#if (n >= 50 and np <= 5):
 	n = 1000
-	p = (1/6)
-	q = (1 - p)
-	x = 3
-	# (1000, 3)
+	p = 1/216		
+	q = 1 - p		
+	l = n * p
 
-	(p**x) * (q**(n - x))
+	#poisson = lambda l, x: ((l**x) // factorial(x)) * exp(-l)
+	poisson = lambda l, x: ((l**x) * exp(-l)) / factorial(x)
+	X = [poisson(l, x) for x in range(0, 21)]
+
+	print(*X, sep='\n')
+
+	'''
+	b = range(1, 18)
+	h1, bin_edges = np.histogram(X, bins = b)
+	b1 = bin_edges[0 : 16]
+	fig1 = plt.figure(1)
+	plt.stem(b1/N, h1)
+	plt.title('Probability of rolling three 6\'s using Poisson')
+	plt.xlabel('Number of rolls')
+	plt.ylabel('Probability')
+	fig1.savefig('Project3Problem3.png')
+	'''
 
 
-
-#def problem_3(N):
 
 '''
 #1
@@ -57,4 +92,7 @@ Binomial formula (theoretical calculation)
 (n, x) p^x q^(n - x)
 '''
 
-problem_1(10000)
+#problem_1(10000)
+problem_2(10000)
+print ('-----------------------------')
+problem_3(10000)
