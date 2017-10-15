@@ -20,8 +20,8 @@ def problem_1(N):
 	fig1.savefig('Project3Problem1.png')
 
 
-def problem_2(N):
-	binomial = lambda n, p, q, x : (factorial(n) // (factorial(x) * factorial(n - x))) * (p**x) * (q**(n - x))
+def problem_2():
+	binomial = lambda n, p, q, x : ((factorial(n) // (factorial(x) * factorial(n - x))) * (p**x) * (q**(n - x)))
 	n = 1000		# number of trials
 	p = 1/216		# probability of success: 3 sixes in a single roll of 3 fair die
 	q = 1 - p		# probability of failure
@@ -33,39 +33,35 @@ def problem_2(N):
 	h1, bin_edges = np.histogram(X, bins = b)
 	b1 = bin_edges[0 : 16]
 	fig1 = plt.figure(1)
-	plt.stem(b1/N, h1)
-	plt.title('Probability of rolling three 6\'s')
+	plt.stem(b1, h1)
+	plt.title('Probability of rolling three 6\'s using Binomial')
 	plt.xlabel('Number of rolls')
 	plt.ylabel('Probability')
-	fig1.savefig('Project3Problem2.png')
+	fig1.savefig('Project3-Problem2.png')
 
 
-def problem_3(N):
-	#if (n >= 50 and np <= 5):
+def problem_3():
+	poisson = lambda l, x: ((l**x) * exp(-l)) / factorial(x)
 	n = 1000
 	p = 1/216		
 	q = 1 - p		
 	l = n * p
 
-	#poisson = lambda l, x: ((l**x) // factorial(x)) * exp(-l)
-	poisson = lambda l, x: ((l**x) * exp(-l)) / factorial(x)
 	X = [poisson(l, x) for x in range(0, 21)]
-
 	print(*X, sep='\n')
-
 	'''
 	b = range(1, 18)
 	h1, bin_edges = np.histogram(X, bins = b)
 	b1 = bin_edges[0 : 16]
 	fig1 = plt.figure(1)
-	plt.stem(b1/N, h1)
+	plt.stem(b1, h1)
 	plt.title('Probability of rolling three 6\'s using Poisson')
 	plt.xlabel('Number of rolls')
 	plt.ylabel('Probability')
-	fig1.savefig('Project3Problem3.png')
+	fig1.savefig('Project3-Problem3.png')
 	'''
-
-
+	plt.hist(X, bins = 16)
+	plt.show()
 
 '''
 #1
@@ -93,6 +89,5 @@ Binomial formula (theoretical calculation)
 '''
 
 #problem_1(10000)
-problem_2(10000)
-print ('-----------------------------')
-problem_3(10000)
+#problem_2()
+problem_3()
