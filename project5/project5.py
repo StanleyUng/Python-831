@@ -1,57 +1,41 @@
-'''
-create a popultion of bearings
-N = 1000000
-choose a sample of n randn for std normal
-
-
-calculate the sample mean, 
-
-z = (x - mu) / sigma
-
-mu = 75
-sigma = 0.75
-
-
-B = random.sample(N), n
-random numbers out of B
-
-X = B()
-
-pop -> mean of sample -> plot it
-
-
-
-
-
-'''
 
 import numpy as np 
-import matplotlib as plt
-
-
-'''
-expectation(x_hat) == mu_x_hat == mu
-expectation[(x_hat - mu_x_hat)**2] == sigma_x_hat**2 == (sigma**2 / n) 
- 
-
-'''
-
-
-
+import matplotlib.pyplot as plt
 
 def problem_1():
-	N = 10**6		# Total number of bearings
+	Nb = 10**6		# Total number of bearings
 	mu = 75			# sample mean 
-	sigma = 0.75	# standard deviation
-	n = range(1, 201)	# sample size n 1 - 200
+	sigma = 7.5	# standard deviation
+	n = range(1, 201) # range from 1 to 200
 
-	# generate population
-	B = mu + np.random.sample(N) * sigma
+	plt.title('Sample Means and 95% Confidence Intervals')
+	plt.xlabel('x_bar')
+	plt.ylabel('Sample Size n')
 
-	
+	B = list(mu + np.random.sample(Nb) * sigma)
+
+	# this shit works
+	x_bar = [np.mean(B[int(np.ceil(np.random.rand() * Nb))]) for i in n]
+	#x_bar = [np.mean(np.random.choice(B, i)) for i in n]
+	#x_bar = [np.mean(B[:i]) for i in n]
+
+	# Sample Means (n, x_bar)
+	plt.plot(n, x_bar, 'x', n, np.repeat(mu, len(n)), 'k')
+
+	# 95% Confidence Interval
+	plt.plot(n, mu + 1.96 * sigma/np.sqrt(n), 'r--', n, mu - 1.96 * sigma/np.sqrt(n), 'r--')
+
+	# 99% Confidence Interval
+	plt.plot(n, mu + 2.58 * sigma/np.sqrt(n), 'g:', n, mu - 2.58 * sigma/np.sqrt(n), 'g:')
+
+	plt.show()
 
 
+def  problem_2():
+	pass
 
+
+problem_1()
 
 
 
