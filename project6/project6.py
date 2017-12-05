@@ -21,11 +21,13 @@ plt.xlabel('Time step (n)');
 plt.ylabel('Prob(State)');
 plt.legend('State R', 'State N', 'State S')
 
+
+# Calculating the initial state
 for j in range(0, N):
-	r0 = np.random.rand()
-	if r0 <= D[0, 0]:
-		s0 = 'R'
-	elif (D[0, 0] + D[0, 1]) >= r0 > D[0, 0]:
-		s0 = 'N'
-	elif r0 > D[0, 0] + D[0, 2]:
-		s0 = 'S'
+	num = np.random.rand()
+	if num <= D[0, 0]:
+		state = 'R'
+	elif D[0, 0] < num <= (D[0, 0] + D[0, 1]):
+		state = 'N'
+	elif D[0, 0] + D[0, 2] < num:
+		state = 'S'
