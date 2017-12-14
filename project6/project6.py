@@ -131,6 +131,9 @@ def problem_2():
 		plt.plot(nv, Y,'o:')
 		plt.show()
 
+		l = [(sum(Y[i][j] for i in range(0, len(Y))) / n) for j in range(0, len(Y[0]))]
+
+		print(*l, sep='\n')
 
 
 
